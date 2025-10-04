@@ -30,11 +30,11 @@ export default function CalendarPage() {
   }
 
   return (
-    <div className="min-h-screen bg-stone-50 pb-20">
+    <div className="min-h-screen bg-background pb-20">
       <div className="max-w-screen-sm mx-auto px-4 py-6">
         <div className="flex items-center gap-3 mb-6">
-          <Calendar className="w-6 h-6 text-stone-700" />
-          <h1 className="text-2xl font-bold text-stone-800">カレンダー</h1>
+          <Calendar className="w-6 h-6 text-foreground" />
+          <h1 className="text-2xl font-bold text-foreground">カレンダー</h1>
         </div>
         
         <Card>
@@ -54,7 +54,7 @@ export default function CalendarPage() {
           <CardContent>
             <div className="grid grid-cols-7 gap-1">
               {['日', '月', '火', '水', '木', '金', '土'].map((day) => (
-                <div key={day} className="text-center text-sm font-medium text-stone-600 py-2">
+                <div key={day} className="text-center text-sm font-medium text-muted-foreground py-2">
                   {day}
                 </div>
               ))}
@@ -63,10 +63,10 @@ export default function CalendarPage() {
                   key={index}
                   className={`text-center py-2 text-sm rounded-lg transition-colors ${
                     day === currentDate.getDate()
-                      ? 'bg-stone-800 text-white'
+                      ? 'bg-primary text-primary-foreground'
                       : day
-                      ? 'text-stone-800 hover:bg-stone-100 cursor-pointer'
-                      : 'text-stone-300'
+                      ? 'text-foreground hover:bg-muted cursor-pointer'
+                      : 'text-muted-foreground'
                   }`}
                 >
                   {day}

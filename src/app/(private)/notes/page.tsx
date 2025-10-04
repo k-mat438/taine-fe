@@ -13,12 +13,12 @@ export default function NotesPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-stone-50 pb-20">
+    <div className="min-h-screen bg-background pb-20">
       <div className="max-w-screen-sm mx-auto px-4 py-6">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <FileText className="w-6 h-6 text-stone-700" />
-            <h1 className="text-2xl font-bold text-stone-800">ノート</h1>
+            <FileText className="w-6 h-6 text-foreground" />
+            <h1 className="text-2xl font-bold text-foreground">ノート</h1>
           </div>
           <Button size="icon">
             <Plus className="w-5 h-5" />
@@ -35,8 +35,8 @@ export default function NotesPage() {
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <p className="text-stone-600 text-sm mb-2 line-clamp-2">{note.content}</p>
-                <p className="text-xs text-stone-500">{note.date}</p>
+                <p className="text-muted-foreground text-sm mb-2 line-clamp-2">{note.content}</p>
+                <p className="text-xs text-muted-foreground">{note.date}</p>
               </CardContent>
             </Card>
           ))}

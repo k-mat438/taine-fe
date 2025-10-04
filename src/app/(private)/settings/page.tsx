@@ -13,11 +13,11 @@ export default function SettingsPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-stone-50 pb-20">
+    <div className="min-h-screen bg-background pb-20">
       <div className="max-w-screen-sm mx-auto px-4 py-6">
         <div className="flex items-center gap-3 mb-6">
-          <Settings className="w-6 h-6 text-stone-700" />
-          <h1 className="text-2xl font-bold text-stone-800">設定</h1>
+          <Settings className="w-6 h-6 text-foreground" />
+          <h1 className="text-2xl font-bold text-foreground">設定</h1>
         </div>
         
         <div className="space-y-3">
@@ -25,14 +25,14 @@ export default function SettingsPage() {
             <Card key={index} className="hover:shadow-md transition-shadow cursor-pointer">
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-stone-100 rounded-full flex items-center justify-center">
-                    <item.icon className="w-5 h-5 text-stone-600" />
+                  <div className="w-10 h-10 bg-muted rounded-full flex items-center justify-center">
+                    <item.icon className="w-5 h-5 text-muted-foreground" />
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold text-stone-800">{item.title}</h3>
-                    <p className="text-sm text-stone-600">{item.description}</p>
+                    <h3 className="font-semibold text-foreground">{item.title}</h3>
+                    <p className="text-sm text-muted-foreground">{item.description}</p>
                   </div>
-                  <ChevronRight className="w-5 h-5 text-stone-400" />
+                  <ChevronRight className="w-5 h-5 text-muted-foreground" />
                 </div>
               </CardContent>
             </Card>
@@ -46,7 +46,7 @@ export default function SettingsPage() {
           </Button>
         </div>
         
-        <div className="mt-6 text-center text-sm text-stone-500">
+        <div className="mt-6 text-center text-sm text-muted-foreground">
           <p>アプリバージョン 1.0.0</p>
         </div>
       </div>

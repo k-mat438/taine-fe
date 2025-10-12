@@ -1,12 +1,13 @@
 "use client";
 
-import { Pencil, FileText, Calendar, Footprints, Settings } from 'lucide-react';
+import { Pencil, FileText, Calendar, Footprints, Settings, MessageSquare } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
 const navItems = [
   { icon: Pencil, href: '/edit', label: '編集' },
   { icon: FileText, href: '/notes', label: 'ノート' },
+  { icon: MessageSquare, href: '/tweets', label: 'Tweet' },
   { icon: Calendar, href: '/calendar', label: 'カレンダー' },
   { icon: Footprints, href: '/tracking', label: '足跡' },
   { icon: Settings, href: '/settings', label: '設定' },

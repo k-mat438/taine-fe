@@ -16,12 +16,6 @@ export interface CreateTweetRequest {
   content: string;
 }
 
-export interface ApiError {
-  message: string;
-  status: number;
-}
-
-
 // Tweet作成
 export async function createTweet(content: string, token: string): Promise<Tweet> {
   try {

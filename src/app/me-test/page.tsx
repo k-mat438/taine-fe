@@ -8,7 +8,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
 export default function MeTestPage() {
   const { isLoaded, isSignedIn, getToken } = useAuth();
   const { user } = useUser();
-  const [result, setResult] = useState<any>(null);
+  const [result, setResult] = useState<Record<string, unknown> | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const callMe = async () => {
@@ -25,8 +25,8 @@ export default function MeTestPage() {
       const json = await res.json();
       if (!res.ok) throw new Error(JSON.stringify(json));
       setResult(json);
-    } catch (e: any) {
-      setError(e.message ?? String(e));
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
     }
   };
 

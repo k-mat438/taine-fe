@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -20,7 +20,7 @@ export function TweetList({ refreshTrigger }: TweetListProps) {
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'all' | 'my'>('all');
 
-  const loadTweets = async () => {
+  const loadTweets = useCallback(async () => {
     if (!isSignedIn) {
       setError('ログインが必要です');
       setIsLoading(false);
@@ -59,11 +59,11 @@ export function TweetList({ refreshTrigger }: TweetListProps) {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [getToken, isSignedIn]);
 
   useEffect(() => {
     loadTweets();
-  }, [refreshTrigger]);
+  }, [refreshTrigger, loadTweets]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

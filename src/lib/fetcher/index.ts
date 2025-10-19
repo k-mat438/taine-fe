@@ -1,6 +1,7 @@
 // APIのベースURL
-export const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1';
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
+  ? `${process.env.NEXT_PUBLIC_API_URL}/api/v1`
+  : 'http://localhost:8080/api/v1';
 
 // 汎用的なfetcher関数の型定義
 export type FetcherOptions = {

@@ -1,5 +1,6 @@
-const API_BASE_URL =
-  process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:3001';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL
+  ? `${process.env.NEXT_PUBLIC_API_URL}/api/v1`
+  : 'http://localhost:3001/api/v1';
 
 export interface Tweet {
   id: string;
@@ -28,7 +29,7 @@ export async function createTweet(
       'Content-Type': 'application/json',
     };
 
-    const response = await fetch(`${API_BASE_URL}/api/v1/tweets`, {
+    const response = await fetch(`${API_BASE_URL}/tweets`, {
       method: 'POST',
       headers,
       body: JSON.stringify({ content }),
@@ -59,7 +60,7 @@ export async function getAllTweets(token: string): Promise<Tweet[]> {
       'Content-Type': 'application/json',
     };
 
-    const response = await fetch(`${API_BASE_URL}/api/v1/tweets`, {
+    const response = await fetch(`${API_BASE_URL}/tweets`, {
       method: 'GET',
       headers,
       cache: 'no-store',
@@ -101,7 +102,7 @@ export async function getMyTweets(token: string): Promise<Tweet[]> {
       'Content-Type': 'application/json',
     };
 
-    const response = await fetch(`${API_BASE_URL}/api/v1/tweets/my`, {
+    const response = await fetch(`${API_BASE_URL}/tweets/my`, {
       method: 'GET',
       headers,
       cache: 'no-store',

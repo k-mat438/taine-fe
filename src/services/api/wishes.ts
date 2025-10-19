@@ -26,7 +26,8 @@ export interface UpdateWishData {
 }
 
 // バックエンドAPIのベースURL（環境変数またはデフォルト値）
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1';
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1';
 
 // Clerkの型定義を拡張
 declare global {
@@ -45,20 +46,22 @@ async function getAuthHeaders(): Promise<HeadersInit> {
     // サーバーサイドの場合
     return { 'Content-Type': 'application/json' };
   }
-  
+
   // クライアントサイドの場合、ClerkのトークンをSessionから取得
   try {
-    const token = await window.Clerk?.session?.getToken({ template: 'backend-taine' });
+    const token = await window.Clerk?.session?.getToken({
+      template: 'backend-taine',
+    });
     if (token) {
       return {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       };
     }
   } catch (error) {
     console.error('Failed to get auth token:', error);
   }
-  
+
   return { 'Content-Type': 'application/json' };
 }
 
@@ -67,9 +70,12 @@ export const wishesApi = {
   // Wish一覧取得
   getWishes: async (organizationId: string): Promise<Wish[]> => {
     const headers = await getAuthHeaders();
-    const response = await fetch(`${API_BASE_URL}/organizations/${organizationId}/wishes`, {
-      headers,
-    });
+    const response = await fetch(
+      `${API_BASE_URL}/organizations/${organizationId}/wishes`,
+      {
+        headers,
+      }
+    );
     if (!response.ok) {
       throw new Error(`Failed to fetch wishes: ${response.statusText}`);
     }
@@ -166,9 +172,11 @@ export const wishesApi = {
   },
 
   // 複数のWishの並び順を一括更新
-  updateWishesOrder: async (wishes: Array<{ id: string; order_no: number }>): Promise<void> => {
+  updateWishesOrder: async (
+    wishes: Array<{ id: string; order_no: number }>
+  ): Promise<void> => {
     // 各Wishの順序を個別に更新
-    const updatePromises = wishes.map(wish =>
+    const updatePromises = wishes.map((wish) =>
       wishesApi.updateWishOrder(wish.id, wish.order_no)
     );
     await Promise.all(updatePromises);

@@ -1,5 +1,5 @@
-import { defaultCache } from "@serwist/next/worker";
-import { Serwist } from "serwist";
+import { defaultCache } from '@serwist/next/worker';
+import { Serwist } from 'serwist';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const self: any;

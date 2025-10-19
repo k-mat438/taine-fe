@@ -40,10 +40,9 @@ export function TweetList({ refreshTrigger }: TweetListProps) {
 
       const [allTweetsData, myTweetsData] = await Promise.all([
         getAllTweets(token),
-        getMyTweets(token)
+        getMyTweets(token),
       ]);
-      
-      
+
       setAllTweets(allTweetsData);
       setMyTweets(myTweetsData);
     } catch (error) {
@@ -72,7 +71,7 @@ export function TweetList({ refreshTrigger }: TweetListProps) {
       month: '2-digit',
       day: '2-digit',
       hour: '2-digit',
-      minute: '2-digit'
+      minute: '2-digit',
     });
   };
 
@@ -81,7 +80,7 @@ export function TweetList({ refreshTrigger }: TweetListProps) {
     console.log('Clerk user ID:', user?.id);
     console.log('Tweet sub_id:', tweet.sub_id);
     console.log('Are they equal?', user?.id === tweet.sub_id);
-    
+
     return user?.id === tweet.sub_id;
   };
 
@@ -136,15 +135,21 @@ export function TweetList({ refreshTrigger }: TweetListProps) {
             <Card>
               <CardContent className="p-6 text-center">
                 <p className="text-gray-500">
-                  {activeTab === 'all' ? 'まだTweetがありません' : 'あなたのTweetがありません'}
+                  {activeTab === 'all'
+                    ? 'まだTweetがありません'
+                    : 'あなたのTweetがありません'}
                 </p>
               </CardContent>
             </Card>
           ) : (
             currentTweets
               .sort((a, b) => {
-                const dateA = a.created_at ? new Date(a.created_at).getTime() : 0;
-                const dateB = b.created_at ? new Date(b.created_at).getTime() : 0;
+                const dateA = a.created_at
+                  ? new Date(a.created_at).getTime()
+                  : 0;
+                const dateB = b.created_at
+                  ? new Date(b.created_at).getTime()
+                  : 0;
                 return dateB - dateA;
               })
               .map((tweet, index) => (
@@ -152,11 +157,15 @@ export function TweetList({ refreshTrigger }: TweetListProps) {
                   <CardHeader className="pb-2">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
-                        <Badge variant={isMyTweet(tweet) ? 'default' : 'secondary'}>
+                        <Badge
+                          variant={isMyTweet(tweet) ? 'default' : 'secondary'}
+                        >
                           {isMyTweet(tweet) ? 'あなた' : '他のユーザー'}
                         </Badge>
                         <span className="text-sm text-gray-500">
-                          {tweet.created_at ? formatDate(tweet.created_at) : '日時不明'}
+                          {tweet.created_at
+                            ? formatDate(tweet.created_at)
+                            : '日時不明'}
                         </span>
                       </div>
                       <div className="text-xs text-gray-400">

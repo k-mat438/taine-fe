@@ -1,5 +1,6 @@
 // APIのベースURL
-export const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1';
+export const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1';
 
 // 汎用的なfetcher関数の型定義
 export type FetcherOptions = {
@@ -39,7 +40,9 @@ export async function fetcher<T = any>(
   const response = await fetch(url, requestOptions);
 
   if (!response.ok) {
-    throw new Error(`API request failed: ${response.status} ${response.statusText}`);
+    throw new Error(
+      `API request failed: ${response.status} ${response.statusText}`
+    );
   }
 
   // レスポンスが空の場合の処理
@@ -52,9 +55,11 @@ export async function fetcher<T = any>(
 }
 
 // Clerk認証付きfetcher（SWR用）
-export function createAuthenticatedFetcher<T = any>(getToken: (options?: any) => Promise<string | null>) {
+export function createAuthenticatedFetcher<T = any>(
+  getToken: (options?: any) => Promise<string | null>
+) {
   return async (url: string): Promise<T> => {
-    const token = await getToken({ template: "backend-taine" });
+    const token = await getToken({ template: 'backend-taine' });
     return fetcher<T>(url, { token });
   };
 }

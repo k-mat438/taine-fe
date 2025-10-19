@@ -2,7 +2,8 @@ import { useAuth } from '@clerk/nextjs';
 import { Wish, CreateWishData, UpdateWishData } from '@/services/api/wishes';
 
 // バックエンドAPIのベースURL（環境変数またはデフォルト値）
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1';
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api/v1';
 
 export function useWishesApi() {
   const { getToken } = useAuth();
@@ -14,13 +15,13 @@ export function useWishesApi() {
       if (token) {
         return {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         };
       }
     } catch (error) {
       console.error('Failed to get auth token:', error);
     }
-    
+
     return { 'Content-Type': 'application/json' };
   };
 
@@ -28,18 +29,23 @@ export function useWishesApi() {
     // Wish一覧取得
     getWishes: async (organizationId: string): Promise<Wish[]> => {
       const headers = await getAuthHeaders();
-      const response = await fetch(`${API_BASE_URL}/organizations/${organizationId}/wishes`, {
-        headers,
-      });
+      const response = await fetch(
+        `${API_BASE_URL}/organizations/${organizationId}/wishes`,
+        {
+          headers,
+        }
+      );
       if (!response.ok) {
         const errorText = await response.text();
         console.error('API Error:', {
           status: response.status,
           statusText: response.statusText,
           body: errorText,
-          url: `${API_BASE_URL}/organizations/${organizationId}/wishes`
+          url: `${API_BASE_URL}/organizations/${organizationId}/wishes`,
         });
-        throw new Error(`Failed to fetch wishes: ${response.statusText} - ${errorText}`);
+        throw new Error(
+          `Failed to fetch wishes: ${response.statusText} - ${errorText}`
+        );
       }
       return response.json();
     },
@@ -57,9 +63,11 @@ export function useWishesApi() {
         console.error('API Error:', {
           status: response.status,
           statusText: response.statusText,
-          body: errorText
+          body: errorText,
         });
-        throw new Error(`Failed to create wish: ${response.statusText} - ${errorText}`);
+        throw new Error(
+          `Failed to create wish: ${response.statusText} - ${errorText}`
+        );
       }
       return response.json();
     },
@@ -140,10 +148,12 @@ export function useWishesApi() {
     },
 
     // 複数のWishの並び順を一括更新
-    updateWishesOrder: async (wishes: Array<{ id: string; order_no: number }>): Promise<void> => {
+    updateWishesOrder: async (
+      wishes: Array<{ id: string; order_no: number }>
+    ): Promise<void> => {
       // 各Wishの順序を個別に更新
       const headers = await getAuthHeaders();
-      const updatePromises = wishes.map(wish => 
+      const updatePromises = wishes.map((wish) =>
         fetch(`${API_BASE_URL}/wishes/${wish.id}/order`, {
           method: 'PATCH',
           headers,
@@ -151,9 +161,9 @@ export function useWishesApi() {
         })
       );
       const responses = await Promise.all(updatePromises);
-      
+
       // エラーチェック
-      const failedResponses = responses.filter(r => !r.ok);
+      const failedResponses = responses.filter((r) => !r.ok);
       if (failedResponses.length > 0) {
         throw new Error('Failed to update some wish orders');
       }

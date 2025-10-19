@@ -6,11 +6,11 @@ export type Wish = {
   order_no: number;
   created_at: string;
   updated_at: string;
-}
+};
 
 export type WishesResponse = {
   wishes: Wish[];
-}
+};
 
 export type ChecklistItem = {
   id: string;
@@ -19,4 +19,4 @@ export type ChecklistItem = {
   checked: boolean;
   avatars: string[];
   subItems?: ChecklistItem[];
-}
+};

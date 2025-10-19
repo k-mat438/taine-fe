@@ -1,6 +1,13 @@
-"use client";
+'use client';
 
-import { Pencil, FileText, Calendar, Footprints, Settings, MessageSquare } from 'lucide-react';
+import {
+  Pencil,
+  FileText,
+  Calendar,
+  Footprints,
+  Settings,
+  MessageSquare,
+} from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 
@@ -28,7 +35,9 @@ export function MobileNavbar() {
               key={item.href}
               href={item.href}
               className={`relative flex flex-col items-center justify-center flex-1 h-full transition-all duration-300 ${
-                isActive ? 'text-stone-800' : 'text-stone-600 hover:text-stone-700'
+                isActive
+                  ? 'text-stone-800'
+                  : 'text-stone-600 hover:text-stone-700'
               }`}
               aria-label={item.label}
             >

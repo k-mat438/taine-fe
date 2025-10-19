@@ -5,25 +5,28 @@ import { API_BASE_URL, fetcher } from './index';
 export const WISHES_ENDPOINT = `${API_BASE_URL}/wishes`;
 
 // SWR用のfetcher関数（認証トークン付き）- page.tsxで使用されているものと同じ
-export const wishesFetcher = async (url: string, getToken: (options?: any) => Promise<string | null>): Promise<WishesResponse> => {
+export const wishesFetcher = async (
+  url: string,
+  getToken: (options?: any) => Promise<string | null>
+): Promise<WishesResponse> => {
   // Clerkから認証トークンを取得
-  const token = await getToken({ template: "backend-taine" });
-  
+  const token = await getToken({ template: 'backend-taine' });
+
   const headers: HeadersInit = {
     'Content-Type': 'application/json',
   };
-  
+
   // トークンがある場合はAuthorizationヘッダーを追加
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
-  
+
   const response = await fetch(url, { headers });
-  
+
   if (!response.ok) {
     throw new Error(`Failed to fetch wishes: ${response.statusText}`);
   }
-  
+
   const data = await response.json();
   return data;
 };
@@ -38,7 +41,7 @@ export async function createWish(
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
   };
-  
+
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
@@ -49,7 +52,7 @@ export async function createWish(
     body: JSON.stringify({
       title,
       note,
-      order_no: order_no || 1
+      order_no: order_no || 1,
     }),
   });
 

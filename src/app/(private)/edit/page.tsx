@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { useState, useRef, useEffect } from 'react';
 import useSWR, { mutate } from 'swr';
@@ -8,13 +8,17 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import type { Wish, WishesResponse, ChecklistItem } from '@/types/edit/wish';
-import { WISHES_ENDPOINT, wishesFetcher, createWish } from '@/lib/fetcher/wishes';
+import {
+  WISHES_ENDPOINT,
+  wishesFetcher,
+  createWish,
+} from '@/lib/fetcher/wishes';
 
 export default function EditPage() {
   const { getToken } = useAuth();
   // チェック状態を管理するためのローカルステート
   const [checkedItems, setCheckedItems] = useState<Set<string>>(new Set());
-  
+
   // 新規Wish追加用のステート
   const [isAddingWish, setIsAddingWish] = useState(false);
   const [newWishTitle, setNewWishTitle] = useState('');
@@ -40,26 +44,27 @@ export default function EditPage() {
   }, [isAddingWish]);
 
   // APIのレスポンスをChecklistItem形式に変換
-  const items: ChecklistItem[] = data?.wishes?.map((wish: Wish) => ({
-    id: wish.id,
-    text: wish.title,
-    note: wish.note,
-    checked: checkedItems.has(wish.id),
-    avatars: ["👨‍🦱", "👩‍🦱"], // デフォルトのアバター
-  })) || [];
+  const items: ChecklistItem[] =
+    data?.wishes?.map((wish: Wish) => ({
+      id: wish.id,
+      text: wish.title,
+      note: wish.note,
+      checked: checkedItems.has(wish.id),
+      avatars: ['👨‍🦱', '👩‍🦱'], // デフォルトのアバター
+    })) || [];
 
   // 新規Wish作成処理
   const handleCreateWish = async () => {
     if (!newWishTitle.trim() || isCreating) return;
-    
+
     setIsCreating(true);
     try {
-      const token = await getToken({ template: "backend-taine" });
+      const token = await getToken({ template: 'backend-taine' });
       await createWish(token, newWishTitle, newWishNote);
-      
+
       // SWRのキャッシュを更新してデータを再取得
       await mutate(WISHES_ENDPOINT);
-      
+
       // フォームをリセット
       setNewWishTitle('');
       setNewWishNote('');
@@ -73,7 +78,7 @@ export default function EditPage() {
   };
 
   const toggleItem = (id: string) => {
-    setCheckedItems(prev => {
+    setCheckedItems((prev) => {
       const newSet = new Set(prev);
       if (newSet.has(id)) {
         newSet.delete(id);
@@ -105,7 +110,7 @@ export default function EditPage() {
             )}
           </Button>
         </div>
-        
+
         {/* 新規Wish追加フォーム */}
         {isAddingWish && (
           <Card className="mb-4 border-primary/20">
@@ -176,21 +181,21 @@ export default function EditPage() {
             </CardContent>
           </Card>
         )}
-        
+
         {/* ローディング表示 */}
         {isLoading && (
           <div className="flex items-center justify-center py-8">
             <Loader2 className="w-8 h-8 animate-spin text-muted-foreground" />
           </div>
         )}
-        
+
         {/* エラー表示 */}
         {error && (
           <div className="bg-destructive/10 text-destructive p-4 rounded-lg mb-4">
             <p className="text-sm">{error.message}</p>
           </div>
         )}
-        
+
         {/* アイテムリスト */}
         {!isLoading && !error && (
           <div className="space-y-3">
@@ -219,17 +224,19 @@ export default function EditPage() {
                             <Circle className="w-4 h-4 text-muted-foreground" />
                           )}
                         </Button>
-                        
+
                         {/* テキスト */}
                         <div className="flex-1">
                           <div>
                             <span className="text-foreground">{item.text}</span>
                             {item.note && (
-                              <p className="text-sm text-muted-foreground mt-1">{item.note}</p>
+                              <p className="text-sm text-muted-foreground mt-1">
+                                {item.note}
+                              </p>
                             )}
                           </div>
                         </div>
-                        
+
                         {/* アバター */}
                         <div className="flex -space-x-1">
                           {item.avatars.map((avatar, index) => (
@@ -244,12 +251,15 @@ export default function EditPage() {
                       </div>
                     </CardContent>
                   </Card>
-                  
+
                   {/* サブアイテム */}
                   {item.subItems && (
                     <div className="ml-6 mt-2 space-y-2">
                       {item.subItems.map((subItem) => (
-                        <Card key={subItem.id} className="hover:shadow-sm transition-shadow">
+                        <Card
+                          key={subItem.id}
+                          className="hover:shadow-sm transition-shadow"
+                        >
                           <CardContent className="p-3">
                             <div className="flex items-center gap-3">
                               <Button
@@ -266,9 +276,11 @@ export default function EditPage() {
                                   <Circle className="w-3 h-3 text-muted-foreground" />
                                 )}
                               </Button>
-                              
+
                               <div className="flex-1">
-                                <span className="text-sm text-muted-foreground">{subItem.text}</span>
+                                <span className="text-sm text-muted-foreground">
+                                  {subItem.text}
+                                </span>
                               </div>
                             </div>
                           </CardContent>

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Calendar, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -8,22 +8,32 @@ export default function CalendarPage() {
   const currentDate = new Date();
   const currentMonth = currentDate.getMonth();
   const currentYear = currentDate.getFullYear();
-  
+
   const monthNames = [
-    "1月", "2月", "3月", "4月", "5月", "6月",
-    "7月", "8月", "9月", "10月", "11月", "12月"
+    '1月',
+    '2月',
+    '3月',
+    '4月',
+    '5月',
+    '6月',
+    '7月',
+    '8月',
+    '9月',
+    '10月',
+    '11月',
+    '12月',
   ];
-  
+
   const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
   const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
-  
+
   const days = [];
-  
+
   // 空の日付セルを追加
   for (let i = 0; i < firstDayOfMonth; i++) {
     days.push(null);
   }
-  
+
   // 月の日付を追加
   for (let day = 1; day <= daysInMonth; day++) {
     days.push(day);
@@ -36,7 +46,7 @@ export default function CalendarPage() {
           <Calendar className="w-6 h-6 text-foreground" />
           <h1 className="text-2xl font-bold text-foreground">カレンダー</h1>
         </div>
-        
+
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
@@ -54,7 +64,10 @@ export default function CalendarPage() {
           <CardContent>
             <div className="grid grid-cols-7 gap-1">
               {['日', '月', '火', '水', '木', '金', '土'].map((day) => (
-                <div key={day} className="text-center text-sm font-medium text-muted-foreground py-2">
+                <div
+                  key={day}
+                  className="text-center text-sm font-medium text-muted-foreground py-2"
+                >
                   {day}
                 </div>
               ))}
@@ -65,8 +78,8 @@ export default function CalendarPage() {
                     day === currentDate.getDate()
                       ? 'bg-primary text-primary-foreground'
                       : day
-                      ? 'text-foreground hover:bg-muted cursor-pointer'
-                      : 'text-muted-foreground'
+                        ? 'text-foreground hover:bg-muted cursor-pointer'
+                        : 'text-muted-foreground'
                   }`}
                 >
                   {day}

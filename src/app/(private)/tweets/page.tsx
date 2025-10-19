@@ -12,7 +12,7 @@ export default function TweetsPage() {
   const { user, isLoaded } = useUser();
 
   const handleTweetCreated = () => {
-    setRefreshTrigger(prev => prev + 1);
+    setRefreshTrigger((prev) => prev + 1);
   };
 
   if (!isLoaded) {
@@ -32,7 +32,7 @@ export default function TweetsPage() {
         <p className="text-gray-600 mb-4">
           認証テスト機能付きのTweetアプリケーションです
         </p>
-        
+
         {/* 認証状態の表示 */}
         {user && (
           <Card className="mb-6">
@@ -96,7 +96,9 @@ export default function TweetsPage() {
               </p>
             </div>
             <div>
-              <h4 className="font-semibold mb-1">4. エラーハンドリングテスト</h4>
+              <h4 className="font-semibold mb-1">
+                4. エラーハンドリングテスト
+              </h4>
               <p className="text-gray-600">
                 ログアウト後にアクセスして401エラーが
                 適切に表示されることを確認してください。

@@ -20,12 +20,12 @@ export function TweetForm({ onTweetCreated }: TweetFormProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!isSignedIn) {
       setError('ログインが必要です');
       return;
     }
-    
+
     if (!content.trim()) {
       setError('Tweetの内容を入力してください');
       return;
@@ -51,7 +51,7 @@ export function TweetForm({ onTweetCreated }: TweetFormProps) {
       setContent('');
       setSuccess('Tweetが作成されました！');
       onTweetCreated();
-      
+
       // 成功メッセージを3秒後に消す
       setTimeout(() => setSuccess(null), 3000);
     } catch (error) {
@@ -91,7 +91,9 @@ export function TweetForm({ onTweetCreated }: TweetFormProps) {
               disabled={isSubmitting}
             />
             <div className="flex justify-between items-center mt-2">
-              <span className={`text-sm ${content.length > 260 ? 'text-red-500' : 'text-gray-500'}`}>
+              <span
+                className={`text-sm ${content.length > 260 ? 'text-red-500' : 'text-gray-500'}`}
+              >
                 {content.length}/280
               </span>
             </div>
@@ -109,8 +111,8 @@ export function TweetForm({ onTweetCreated }: TweetFormProps) {
             </div>
           )}
 
-          <Button 
-            type="submit" 
+          <Button
+            type="submit"
             disabled={isSubmitting || !content.trim()}
             className="w-full"
           >

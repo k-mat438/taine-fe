@@ -18,17 +18,17 @@
 //   return NextResponse.json({ user: user }, { status: 200 })
 // }
 
-import { auth } from "@clerk/nextjs/server";
+import { auth } from '@clerk/nextjs/server';
 export async function GET() {
   const session = await auth();
-  if (!session.userId) return new Response("Unauthorized", { status: 401 });
+  if (!session.userId) return new Response('Unauthorized', { status: 401 });
 
-  const token = await session.getToken(); // 方式A: テンプレなしセッショントークン 
-  if (!token) return new Response("No token", { status: 401 });
+  const token = await session.getToken(); // 方式A: テンプレなしセッショントークン
+  if (!token) return new Response('No token', { status: 401 });
 
-  const res = await fetch(process.env.NEXT_PUBLIC_API_BASE! + "/api/v1/me", {
+  const res = await fetch(process.env.NEXT_PUBLIC_API_BASE! + '/api/v1/me', {
     headers: { Authorization: `Bearer ${token}` },
-    cache: "no-store",
+    cache: 'no-store',
   });
 
   return new Response(await res.text(), { status: res.status });

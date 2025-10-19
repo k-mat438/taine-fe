@@ -6,12 +6,12 @@ export const API_BASE_URL =
 export type FetcherOptions = {
   token?: string | null;
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
-  body?: any;
+  body?: unknown;
   headers?: Record<string, string>;
 };
 
 // 汎用的なfetcher関数
-export async function fetcher<T = any>(
+export async function fetcher<T = unknown>(
   url: string,
   options: FetcherOptions = {}
 ): Promise<T> {
@@ -55,8 +55,8 @@ export async function fetcher<T = any>(
 }
 
 // Clerk認証付きfetcher（SWR用）
-export function createAuthenticatedFetcher<T = any>(
-  getToken: (options?: any) => Promise<string | null>
+export function createAuthenticatedFetcher<T = unknown>(
+  getToken: (options?: { template?: string }) => Promise<string | null>
 ) {
   return async (url: string): Promise<T> => {
     const token = await getToken({ template: 'backend-taine' });

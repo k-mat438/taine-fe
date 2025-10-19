@@ -7,7 +7,7 @@ export const WISHES_ENDPOINT = `${API_BASE_URL}/wishes`;
 // SWR用のfetcher関数（認証トークン付き）- page.tsxで使用されているものと同じ
 export const wishesFetcher = async (
   url: string,
-  getToken: (options?: any) => Promise<string | null>
+  getToken: (options?: { template?: string }) => Promise<string | null>
 ): Promise<WishesResponse> => {
   // Clerkから認証トークンを取得
   const token = await getToken({ template: 'backend-taine' });

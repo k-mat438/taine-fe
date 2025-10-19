@@ -8,17 +8,53 @@ import {
   HelpCircle,
   LogOut,
   ChevronRight,
+  Users,
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { useRouter } from 'next/navigation';
 
 export default function SettingsPage() {
+  const router = useRouter();
+
   const settingsItems = [
-    { icon: User, title: 'プロフィール', description: '個人情報の管理' },
-    { icon: Bell, title: '通知', description: '通知設定の管理' },
-    { icon: Shield, title: 'プライバシー', description: 'プライバシー設定' },
-    { icon: HelpCircle, title: 'ヘルプ', description: 'サポートとヘルプ' },
+    {
+      icon: User,
+      title: 'プロフィール',
+      description: '個人情報の管理',
+      href: '/settings/profile',
+    },
+    {
+      icon: Users,
+      title: '組織・招待',
+      description: 'チームメンバーの管理と招待',
+      href: '/settings/organization',
+    },
+    {
+      icon: Bell,
+      title: '通知',
+      description: '通知設定の管理',
+      href: null,
+    },
+    {
+      icon: Shield,
+      title: 'プライバシー',
+      description: 'プライバシー設定',
+      href: null,
+    },
+    {
+      icon: HelpCircle,
+      title: 'ヘルプ',
+      description: 'サポートとヘルプ',
+      href: null,
+    },
   ];
+
+  const handleItemClick = (href: string | null) => {
+    if (href) {
+      router.push(href);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background pb-20">
@@ -33,6 +69,7 @@ export default function SettingsPage() {
             <Card
               key={index}
               className="hover:shadow-md transition-shadow cursor-pointer"
+              onClick={() => handleItemClick(item.href)}
             >
               <CardContent className="p-4">
                 <div className="flex items-center gap-3">

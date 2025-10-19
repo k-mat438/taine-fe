@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Footprints, MapPin, Clock } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -6,11 +6,41 @@ import { Badge } from '@/components/ui/badge';
 
 export default function TrackingPage() {
   const trackingData = [
-    { id: 1, location: "渋谷駅", time: "09:30", date: "2024-01-15", type: "駅" },
-    { id: 2, location: "新宿駅", time: "10:15", date: "2024-01-15", type: "駅" },
-    { id: 3, location: "東京駅", time: "11:00", date: "2024-01-15", type: "駅" },
-    { id: 4, location: "銀座", time: "14:30", date: "2024-01-14", type: "商業施設" },
-    { id: 5, location: "表参道", time: "16:45", date: "2024-01-14", type: "商業施設" },
+    {
+      id: 1,
+      location: '渋谷駅',
+      time: '09:30',
+      date: '2024-01-15',
+      type: '駅',
+    },
+    {
+      id: 2,
+      location: '新宿駅',
+      time: '10:15',
+      date: '2024-01-15',
+      type: '駅',
+    },
+    {
+      id: 3,
+      location: '東京駅',
+      time: '11:00',
+      date: '2024-01-15',
+      type: '駅',
+    },
+    {
+      id: 4,
+      location: '銀座',
+      time: '14:30',
+      date: '2024-01-14',
+      type: '商業施設',
+    },
+    {
+      id: 5,
+      location: '表参道',
+      time: '16:45',
+      date: '2024-01-14',
+      type: '商業施設',
+    },
   ];
 
   return (
@@ -20,7 +50,7 @@ export default function TrackingPage() {
           <Footprints className="w-6 h-6 text-foreground" />
           <h1 className="text-2xl font-bold text-foreground">足跡</h1>
         </div>
-        
+
         <div className="space-y-4">
           {trackingData.map((item, index) => (
             <Card key={item.id}>
@@ -36,7 +66,9 @@ export default function TrackingPage() {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-start justify-between mb-1">
-                      <h3 className="font-semibold text-foreground">{item.location}</h3>
+                      <h3 className="font-semibold text-foreground">
+                        {item.location}
+                      </h3>
                       <Badge variant="outline">{item.type}</Badge>
                     </div>
                     <div className="flex items-center gap-4 text-sm text-muted-foreground">
@@ -52,7 +84,7 @@ export default function TrackingPage() {
             </Card>
           ))}
         </div>
-        
+
         <Card className="mt-6">
           <CardHeader>
             <CardTitle>統計</CardTitle>

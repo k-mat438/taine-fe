@@ -1,4 +1,5 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:3001';
+const API_BASE_URL =
+  process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:3001';
 
 export interface Tweet {
   id: string;
@@ -17,13 +18,16 @@ export interface CreateTweetRequest {
 }
 
 // Tweet作成
-export async function createTweet(content: string, token: string): Promise<Tweet> {
+export async function createTweet(
+  content: string,
+  token: string
+): Promise<Tweet> {
   try {
     const headers = {
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     };
-    
+
     const response = await fetch(`${API_BASE_URL}/api/v1/tweets`, {
       method: 'POST',
       headers,
@@ -51,10 +55,10 @@ export async function createTweet(content: string, token: string): Promise<Tweet
 export async function getAllTweets(token: string): Promise<Tweet[]> {
   try {
     const headers = {
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     };
-    
+
     const response = await fetch(`${API_BASE_URL}/api/v1/tweets`, {
       method: 'GET',
       headers,
@@ -70,7 +74,7 @@ export async function getAllTweets(token: string): Promise<Tweet[]> {
     }
 
     const data = await response.json();
-    
+
     // レスポンス構造をチェック
     if (data.tweets && Array.isArray(data.tweets)) {
       return data.tweets;
@@ -93,10 +97,10 @@ export async function getAllTweets(token: string): Promise<Tweet[]> {
 export async function getMyTweets(token: string): Promise<Tweet[]> {
   try {
     const headers = {
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     };
-    
+
     const response = await fetch(`${API_BASE_URL}/api/v1/tweets/my`, {
       method: 'GET',
       headers,
@@ -112,7 +116,7 @@ export async function getMyTweets(token: string): Promise<Tweet[]> {
     }
 
     const data = await response.json();
-    
+
     // レスポンス構造をチェック
     if (data.tweets && Array.isArray(data.tweets)) {
       return data.tweets;

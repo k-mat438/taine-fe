@@ -10,7 +10,7 @@ export default function RootLayout({
     <>
       <main className="pb-16 min-h-screen">
         {children}
-      <UserButton />
+        <UserButton />
       </main>
       <MobileNavbar />
     </>

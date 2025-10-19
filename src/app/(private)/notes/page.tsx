@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { FileText, Plus } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -7,9 +7,27 @@ import { Badge } from '@/components/ui/badge';
 
 export default function NotesPage() {
   const notes = [
-    { id: 1, title: "今日の振り返り", content: "今日は良い一日だった", date: "2024-01-15", category: "日記" },
-    { id: 2, title: "アイデアメモ", content: "新しいプロジェクトのアイデア", date: "2024-01-14", category: "アイデア" },
-    { id: 3, title: "買い物リスト", content: "牛乳、パン、卵", date: "2024-01-13", category: "リスト" },
+    {
+      id: 1,
+      title: '今日の振り返り',
+      content: '今日は良い一日だった',
+      date: '2024-01-15',
+      category: '日記',
+    },
+    {
+      id: 2,
+      title: 'アイデアメモ',
+      content: '新しいプロジェクトのアイデア',
+      date: '2024-01-14',
+      category: 'アイデア',
+    },
+    {
+      id: 3,
+      title: '買い物リスト',
+      content: '牛乳、パン、卵',
+      date: '2024-01-13',
+      category: 'リスト',
+    },
   ];
 
   return (
@@ -24,10 +42,13 @@ export default function NotesPage() {
             <Plus className="w-5 h-5" />
           </Button>
         </div>
-        
+
         <div className="space-y-3">
           {notes.map((note) => (
-            <Card key={note.id} className="hover:shadow-md transition-shadow cursor-pointer">
+            <Card
+              key={note.id}
+              className="hover:shadow-md transition-shadow cursor-pointer"
+            >
               <CardHeader className="pb-2">
                 <div className="flex items-start justify-between">
                   <CardTitle className="text-lg">{note.title}</CardTitle>
@@ -35,7 +56,9 @@ export default function NotesPage() {
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <p className="text-muted-foreground text-sm mb-2 line-clamp-2">{note.content}</p>
+                <p className="text-muted-foreground text-sm mb-2 line-clamp-2">
+                  {note.content}
+                </p>
                 <p className="text-xs text-muted-foreground">{note.date}</p>
               </CardContent>
             </Card>

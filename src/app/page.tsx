@@ -1,6 +1,12 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Button } from '@/components/ui/button';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import {
   Dialog,
   DialogContent,
@@ -8,7 +14,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 
 export default function Home() {
   return (
@@ -17,7 +23,7 @@ export default function Home() {
       <p className="text-center text-stone-600 mb-6">
         下のナビゲーションバーから各機能にアクセスできます
       </p>
-      
+
       {/* shadcn/ui コンポーネントのテスト */}
       <Card className="mb-4">
         <CardHeader>

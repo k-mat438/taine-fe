@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { useAuth, useUser, SignInButton, UserButton } from "@clerk/nextjs";
+import { useState } from 'react';
+import { useAuth, useUser, SignInButton, UserButton } from '@clerk/nextjs';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8080";
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8080';
 
 export default function MeTestPage() {
   const { isLoaded, isSignedIn, getToken } = useAuth();
@@ -17,7 +17,7 @@ export default function MeTestPage() {
     try {
       const token = await getToken(); // Clerkのセッショントークン
       const res = await fetch(`${API_URL}/api/v1/me`, {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,7 +38,12 @@ export default function MeTestPage() {
         {isLoaded && isSignedIn ? (
           <>
             <UserButton />
-            <p>Signed in as: {user?.primaryEmailAddress?.emailAddress ?? user?.username ?? user?.id}</p>
+            <p>
+              Signed in as:{' '}
+              {user?.primaryEmailAddress?.emailAddress ??
+                user?.username ??
+                user?.id}
+            </p>
           </>
         ) : (
           <>
@@ -48,12 +53,28 @@ export default function MeTestPage() {
         )}
       </div>
 
-      <button onClick={callMe} disabled={!isLoaded} style={{ padding: "8px 16px" }}>
+      <button
+        onClick={callMe}
+        disabled={!isLoaded}
+        style={{ padding: '8px 16px' }}
+      >
         /api/v1/me を呼ぶ
       </button>
 
-      <pre style={{ marginTop: 16, background: "#111", color: "#0f0", padding: 12, borderRadius: 8 }}>
-        {error ? `ERROR:\n${error}` : result ? JSON.stringify(result, null, 2) : "結果はここに表示されます"}
+      <pre
+        style={{
+          marginTop: 16,
+          background: '#111',
+          color: '#0f0',
+          padding: 12,
+          borderRadius: 8,
+        }}
+      >
+        {error
+          ? `ERROR:\n${error}`
+          : result
+            ? JSON.stringify(result, null, 2)
+            : '結果はここに表示されます'}
       </pre>
     </main>
   );
